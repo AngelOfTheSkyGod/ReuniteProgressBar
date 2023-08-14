@@ -1,6 +1,12 @@
 import { CountryData } from "../types/datetypes";
 
-const textTiles = (timeZones: any, prefix: string) => {
+export const TextTiles = ({
+  timeZones,
+  prefix,
+}: {
+  timeZones: any;
+  prefix: string;
+}) => {
   return timeZones.map((countryData: CountryData) => {
     return (
       <div className="country-information-container">

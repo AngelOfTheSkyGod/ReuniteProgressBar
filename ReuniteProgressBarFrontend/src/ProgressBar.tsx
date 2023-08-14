@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { TextTiles } from "./components/TextTiles";
 import { CountryData } from "./types/datetypes";
 import { buildCountryDateFromDate, calculateProgress } from "./utils/dateUtils";
 export const ProgressBar = () => {
@@ -60,15 +61,10 @@ export const ProgressBar = () => {
 
   return (
     <div className="progress-bar-container">
-      <h1>
-        {" "}
-        Time in {americanData.countryName}: {americanData.formatted}
+      <TextTiles timeZones={[americanData, japaneseData]} prefix={"Time in"} />
+      <h1 className="current-progress-text">
+        Current Progress: {`${currentDateMillis} %`}
       </h1>
-      <h1>
-        {" "}
-        Time in {japaneseData.countryName}: {japaneseData.formatted}
-      </h1>
-      <h1>Current Progress: {`${currentDateMillis} %`}</h1>
       <div className="progress-bar-background">
         <div
           className="progress-bar-foreground"

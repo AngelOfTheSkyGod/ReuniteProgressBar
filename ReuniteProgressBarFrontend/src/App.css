@@ -1,29 +1,112 @@
+:root {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgb(2, 24, 171) 100%
+  );
+  animation: gradient 30s ease infinite;
+  background-size: 400% 400%;
+}
+
 .RPBContainer {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: chocolate;
 }
 
 .progress-bar-container {
   width: 100%;
-  height: 25%;
+  height: 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 .progress-bar-background {
-  height: 15rem;
+  height: 50rem;
   width: 50%;
   background-color: bisque;
   display: flex;
   justify-content: left;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .progress-bar-foreground {
   background-color: black;
   height: 100%;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.current-progress-text {
+  font-size: 5rem;
+  font-family: "Lato", sans-serif;
+  color: #cccccc;
+}
+.country-text {
+  font-size: 3rem;
+  font-family: "Open Sans", sans-serif;
+
+  color: #cccccc;
+  animation: number-change 0.5s ease-in-out forwards;
+}
+
+@keyframes number-change {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media only screen and (max-width: 359px) {
+  :root {
+    /* background-color: black; */
+
+    font-size: 0.7vh;
+  }
+}
+@media only screen and (min-width: 360px) and (max-width: 375px) {
+  :root {
+    /* background-color: red; */
+
+    font-size: 0.6vh;
+  }
+}
+/* PHONE SCREENS */
+@media only screen and (min-width: 375px) and (max-width: 820px) {
+  :root {
+    /* background-color: aliceblue; */
+    font-size: 0.5vh;
+  }
+}
+/* LAPTOP SCREENS */
+@media only screen and (min-width: 820px) and (max-width: 1500px) {
+  :root {
+    font-size: 0.6vh;
+  }
+}
+/* MONITOR SCREENS */
+@media only screen and (min-width: 1500px) {
+  :root {
+    /* background-color: blueviolet; */
+
+    font-size: 0.9vh;
+  }
 }
