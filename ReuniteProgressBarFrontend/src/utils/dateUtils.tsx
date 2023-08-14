@@ -13,19 +13,24 @@ export const calculateProgress = (): number => {
   console.log("days elapsed: " + daysElapsed);
   return Math.ceil((daysElapsed / totalDays) * 100);
 };
-
+const formatMinsOrSeconds = (time: number): string => {
+  return time >= 10 ? time.toString() : "0" + time.toString();
+};
+const formattedDateAndTime = (date: Date): string => {
+  let hours: number = (date.getHours() + 24) % 12 || 12;
+  let formatMinutes: string = formatMinsOrSeconds(date.getMinutes());
+  let formatSeconds: string = formatMinsOrSeconds(date.getSeconds());
+  let formatHours: string =
+    hours >= 10 ? hours.toString() : "0" + hours.toString();
+  let timeSuffix: string = date.getHours() >= 12 ? "pm" : "am";
+  return `(${
+    date.getMonth() + 1
+  }/${date.getDate()}/${date.getFullYear()}) : ${formatHours} : ${formatMinutes} : ${formatSeconds} ${timeSuffix}`;
+};
 export const buildCountryDateFromDate = (
   date: Date,
   country: string
 ): CountryData => {
-  let formatMinutes: string =
-    date.getMinutes() > 10
-      ? date.getMinutes().toString()
-      : "0" + date.getMinutes().toString();
-  let formatHours: string =
-    ((date.getHours() + 24) % 12 || 12) > 10
-      ? ((date.getHours() + 24) % 12 || 12).toString()
-      : "0" + ((date.getHours() + 24) % 12 || 12).toString();
   let countryData: CountryData = {
     month: date.getMonth() + 1,
     days: date.getDate(),
@@ -34,11 +39,8 @@ export const buildCountryDateFromDate = (
     seconds: date.getSeconds(),
     countryName: country,
     year: date.getFullYear(),
-    formatted: `(${
-      date.getMonth() + 1
-    }/${date.getDate()}/${date.getFullYear()}) : ${formatHours} : ${formatMinutes} : ${date.getSeconds()}`,
+    formatted: formattedDateAndTime(date),
     timestamp: date.getMilliseconds(),
   };
-  console.log(`data: ${JSON.stringify(countryData)}`);
   return countryData;
 };
