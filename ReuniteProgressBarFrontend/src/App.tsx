@@ -1,16 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { ProgressBar } from "./ProgressBar";
 
 function App() {
-  const [count, setCount] = useState(0)
+  let value: number = 50;
+  let maxValue: number = 100;
 
   return (
-    <>
-     <h1> Hello </h1>
-    </>
-  )
+    <div className="RPBContainer">
+      <ProgressBar />
+    </div>
+  );
 }
 
-export default App
+export default App;
