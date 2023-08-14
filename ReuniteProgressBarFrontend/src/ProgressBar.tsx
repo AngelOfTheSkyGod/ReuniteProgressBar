@@ -1,7 +1,27 @@
 import { useEffect, useState } from "react";
+import { StatsTiles } from "./components/StatsTiles";
 import { TextTiles } from "./components/TextTiles";
 import { CountryData } from "./types/datetypes";
-import { buildCountryDateFromDate, calculateProgress } from "./utils/dateUtils";
+import { StatsData } from "./types/statstypes";
+import {
+  buildCountryDateFromDate,
+  buildStatsFromDate,
+  calculateProgress,
+} from "./utils/dateUtils";
+
+export const getUTCDate = (): Date => {
+  let date: Date = new Date();
+
+  return new Date(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    date.getUTCHours(),
+    date.getUTCMinutes(),
+    date.getUTCSeconds(),
+    date.getUTCMilliseconds()
+  );
+};
 export const ProgressBar = () => {
   let date: Date = new Date();
   const [currentDateMillis, setCurrentDateMillis] = useState<number>(
@@ -21,23 +41,23 @@ export const ProgressBar = () => {
 
   const [americanData, setAmericanData] = useState<CountryData>(baseObj);
   const [japaneseData, setJapaneseData] = useState<CountryData>(baseObj);
+
+  const [statsData, setStatsData] = useState<StatsData>({
+    weeksLeft: 0,
+    daysLeft: 0,
+    monthsLeft: 0,
+  });
   let unmounted = false;
+
+  const calculateStats = () => {
+    let date: Date = getUTCDate();
+    setStatsData(buildStatsFromDate(date));
+  };
+
   const calculateTimes = () => {
-    let date: Date = new Date();
-
-    let utc_now = new Date(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      date.getUTCHours(),
-      date.getUTCMinutes(),
-      date.getUTCSeconds(),
-      date.getUTCMilliseconds()
-    );
-
-    console.log(` date: ${date.toString()} utc milliseconds: ${Date.now()}`);
-    let japanDate: Date = new Date(utc_now.getTime() + 32400000);
-    let chicagoDate: Date = new Date(utc_now.getTime() - 18000000);
+    let date: Date = getUTCDate();
+    let japanDate: Date = new Date(date.getTime() + 32400000);
+    let chicagoDate: Date = new Date(date.getTime() - 18000000);
     setAmericanData(buildCountryDateFromDate(chicagoDate, "Chicago, Illinois"));
     setJapaneseData(buildCountryDateFromDate(japanDate, "Yokohama, Japan"));
   };
@@ -46,8 +66,10 @@ export const ProgressBar = () => {
     let progress = calculateProgress();
     calculateTimes();
     setCurrentDateMillis(progress);
+    calculateStats();
   };
   useEffect(() => {
+    startReload();
     const id = setInterval(async () => {
       if (unmounted) {
         clearInterval(id);
@@ -71,6 +93,7 @@ export const ProgressBar = () => {
           style={{ width: `${currentDateMillis}%` }}
         ></div>
       </div>
+      <StatsTiles statsData={statsData} />
     </div>
   );
 };

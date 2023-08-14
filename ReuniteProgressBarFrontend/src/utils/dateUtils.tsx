@@ -1,4 +1,5 @@
 import { CountryData } from "../types/datetypes";
+import { StatsData } from "../types/statstypes";
 
 export const calculateProgress = (): number => {
   let date: Date = new Date();
@@ -16,6 +17,29 @@ export const calculateProgress = (): number => {
 
 const formatMinsOrSeconds = (time: number): string => {
   return time >= 10 ? time.toString() : "0" + time.toString();
+};
+
+export const buildStatsFromDate = (utcDate: Date): StatsData => {
+  let chicagoDate: Date = new Date(utcDate.getTime() - 18000000);
+  let differenceMilliseconds: number =
+    utcDate.getTime() - chicagoDate.getTime();
+  const millisecondsInSecond = 1000;
+  const secondsInMinute = 60;
+  const minutesInHour = 60;
+  const hoursInDay = 24;
+  const daysInWeek = 7;
+  const daysInMonth = 30;
+
+  const totalSeconds = differenceMilliseconds / millisecondsInSecond;
+  const totalMinutes = totalSeconds / secondsInMinute;
+  const totalHours = totalMinutes / minutesInHour;
+  const totalDays = totalHours / hoursInDay;
+  const totalWeeks = totalDays / daysInWeek;
+  return {
+    weeksLeft: Math.floor(totalWeeks),
+    monthsLeft: Math.floor(totalDays / daysInMonth),
+    daysLeft: Math.floor(totalDays % daysInMonth),
+  };
 };
 
 const formattedDateAndTime = (date: Date, countryName: string): string => {
