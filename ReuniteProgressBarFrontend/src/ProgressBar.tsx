@@ -41,15 +41,17 @@ export const ProgressBar = () => {
     setJapaneseData(buildCountryDateFromDate(japanDate, "Yokohama, Japan"));
   };
 
+  const startReload = () => {
+    let progress = calculateProgress();
+    calculateTimes();
+    setCurrentDateMillis(progress);
+  };
   useEffect(() => {
     const id = setInterval(async () => {
       if (unmounted) {
         clearInterval(id);
       }
-      let progress = calculateProgress();
-      console.log("progress: " + progress);
-      calculateTimes();
-      setCurrentDateMillis(progress);
+      startReload();
     }, 1000);
     return () => {
       unmounted = true;
