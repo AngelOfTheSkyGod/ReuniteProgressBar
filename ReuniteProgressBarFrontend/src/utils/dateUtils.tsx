@@ -1,8 +1,21 @@
 import { CountryData } from "../types/datetypes";
 import { StatsData } from "../types/statstypes";
+export const getUTCDate = (offset: number): Date => {
+  let date2 = new Date();
+  let date: Date = new Date(date2.getTime() + offset);
 
+  return new Date(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    date.getUTCHours(),
+    date.getUTCMinutes(),
+    date.getUTCSeconds(),
+    date.getUTCMilliseconds()
+  );
+};
 export const calculateProgress = (): number => {
-  let date: Date = new Date();
+  let date: Date = getUTCDate(-18000000);
   let daysElapsed = 1;
   let totalDays = 51;
   if (date.getMonth() == 7) {
