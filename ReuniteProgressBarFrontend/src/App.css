@@ -20,14 +20,15 @@
 
 .progress-bar-container {
   width: 100%;
-  height: 30rem;
+  /* height: 80rem; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 5rem;
 }
 .progress-bar-background {
-  height: 50rem;
+  height: 3rem;
   width: 50%;
   background-color: bisque;
   display: flex;

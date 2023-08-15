@@ -5,13 +5,11 @@ export const calculateProgress = (): number => {
   let date: Date = new Date();
   let daysElapsed = 1;
   let totalDays = 51;
-  console.log("month: " + date.getMonth());
   if (date.getMonth() == 7) {
     daysElapsed += date.getDate() + 1;
   } else if (date.getMonth() == 8) {
     daysElapsed += 32 + date.getDate();
   }
-  console.log("days elapsed: " + daysElapsed);
   return Math.ceil((daysElapsed / totalDays) * 100);
 };
 
@@ -20,7 +18,7 @@ const formatMinsOrSeconds = (time: number): string => {
 };
 
 export const buildStatsFromDate = (utcDate: Date): StatsData => {
-  let futureDate = new Date(2023, 8, 20);
+  let futureDate = new Date(2023, 8, 20, 0, 0, 0, 0);
   let utcData = new Date(
     futureDate.getUTCFullYear(),
     futureDate.getUTCMonth(),
@@ -33,23 +31,21 @@ export const buildStatsFromDate = (utcDate: Date): StatsData => {
   let chicagoDate: Date = new Date(utcDate.getTime() - 18000000);
   let differenceMilliseconds: number =
     utcData.getTime() - chicagoDate.getTime();
-  const millisecondsInSecond = 1000;
-  const secondsInMinute = 60;
-  const minutesInHour = 60;
-  const hoursInDay = 24;
-  const daysInWeek = 7;
-  const daysInMonth = 30;
-  console.log("difference: " + differenceMilliseconds);
-  const totalSeconds = differenceMilliseconds / millisecondsInSecond;
-  const totalMinutes = totalSeconds / secondsInMinute;
-  const totalHours = totalMinutes / minutesInHour;
-  const totalDays = totalHours / hoursInDay;
-  const totalWeeks = totalDays / daysInWeek;
-  console.log("days left: " + totalDays);
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+  const millisecondsPerWeek = millisecondsPerDay * 7;
+  const millisecondsPerMonth = millisecondsPerDay * 30; // Average days in a month
+
+  const months = Math.floor(differenceMilliseconds / millisecondsPerMonth);
+  differenceMilliseconds %= millisecondsPerMonth;
+
+  const weeks = Math.floor(differenceMilliseconds / millisecondsPerWeek);
+  differenceMilliseconds %= millisecondsPerWeek;
+
+  const days = Math.floor(differenceMilliseconds / millisecondsPerDay);
   return {
-    weeksLeft: Math.floor(totalWeeks),
-    monthsLeft: Math.floor(totalDays / daysInMonth),
-    daysLeft: Math.floor(totalDays % daysInMonth),
+    weeksLeft: weeks,
+    monthsLeft: months,
+    daysLeft: days,
   };
 };
 
