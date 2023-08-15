@@ -20,21 +20,32 @@ const formatMinsOrSeconds = (time: number): string => {
 };
 
 export const buildStatsFromDate = (utcDate: Date): StatsData => {
+  let futureDate = new Date(2023, 8, 20);
+  let utcData = new Date(
+    futureDate.getUTCFullYear(),
+    futureDate.getUTCMonth(),
+    futureDate.getUTCDate(),
+    futureDate.getUTCHours(),
+    futureDate.getUTCMinutes(),
+    futureDate.getUTCSeconds(),
+    futureDate.getUTCMilliseconds()
+  );
   let chicagoDate: Date = new Date(utcDate.getTime() - 18000000);
   let differenceMilliseconds: number =
-    utcDate.getTime() - chicagoDate.getTime();
+    utcData.getTime() - chicagoDate.getTime();
   const millisecondsInSecond = 1000;
   const secondsInMinute = 60;
   const minutesInHour = 60;
   const hoursInDay = 24;
   const daysInWeek = 7;
   const daysInMonth = 30;
-
+  console.log("difference: " + differenceMilliseconds);
   const totalSeconds = differenceMilliseconds / millisecondsInSecond;
   const totalMinutes = totalSeconds / secondsInMinute;
   const totalHours = totalMinutes / minutesInHour;
   const totalDays = totalHours / hoursInDay;
   const totalWeeks = totalDays / daysInWeek;
+  console.log("days left: " + totalDays);
   return {
     weeksLeft: Math.floor(totalWeeks),
     monthsLeft: Math.floor(totalDays / daysInMonth),
