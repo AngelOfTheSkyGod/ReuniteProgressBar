@@ -8,8 +8,11 @@
   );
   animation: gradient 30s ease infinite;
   background-size: 400% 400%;
+  margin: 0px;
 }
-
+.body {
+  margin: 0px;
+}
 .RPBContainer {
   width: 100vw;
   height: 100vh;
