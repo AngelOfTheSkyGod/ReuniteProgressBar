@@ -7,21 +7,9 @@ import {
   buildCountryDateFromDate,
   buildStatsFromDate,
   calculateProgress,
+  getUTCDate,
 } from "./utils/dateUtils";
 
-export const getUTCDate = (): Date => {
-  let date: Date = new Date();
-
-  return new Date(
-    date.getUTCFullYear(),
-    date.getUTCMonth(),
-    date.getUTCDate(),
-    date.getUTCHours(),
-    date.getUTCMinutes(),
-    date.getUTCSeconds(),
-    date.getUTCMilliseconds()
-  );
-};
 export const ProgressBar = () => {
   let date: Date = new Date();
   const [currentDateMillis, setCurrentDateMillis] = useState<number>(
@@ -50,12 +38,12 @@ export const ProgressBar = () => {
   let unmounted = false;
 
   const calculateStats = () => {
-    let date: Date = getUTCDate();
+    let date: Date = getUTCDate(0);
     setStatsData(buildStatsFromDate(date));
   };
 
   const calculateTimes = () => {
-    let date: Date = getUTCDate();
+    let date: Date = getUTCDate(0);
     let japanDate: Date = new Date(date.getTime() + 32400000);
     let chicagoDate: Date = new Date(date.getTime() - 18000000);
     setAmericanData(buildCountryDateFromDate(chicagoDate, "Chicago, Illinois"));
