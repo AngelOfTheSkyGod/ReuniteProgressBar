@@ -1,9 +1,11 @@
 import "./App.css";
-import { ProgressBar } from "./ProgressBar";
+import { ProgressBar } from "./containers/ProgressBar";
+import { WeatherInfo } from "./containers/WeatherInfo";
 
 function App() {
   return (
     <div className="RPBContainer">
+      <WeatherInfo />
       <ProgressBar />
     </div>
   );

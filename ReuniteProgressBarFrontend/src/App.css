@@ -9,21 +9,20 @@
   animation: gradient 30s ease infinite;
   background-size: 400% 400%;
   margin: 0px;
+  overflow: hidden;
 }
 .body {
   margin: 0px;
+  overflow: hidden;
 }
 .RPBContainer {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .progress-bar-container {
   width: 100%;
-  /* height: 80rem; */
+  height: 60%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,6 +43,11 @@
 .progress-bar-foreground {
   background-color: black;
   height: 100%;
+}
+.weather-info-container {
+  background-color: bisque;
+  width: 100%;
+  height: 25%;
 }
 @keyframes gradient {
   0% {
