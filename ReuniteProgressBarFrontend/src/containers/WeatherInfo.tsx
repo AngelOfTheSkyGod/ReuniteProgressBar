@@ -19,8 +19,8 @@ export const WeatherInfo = () => {
   }, []);
   return (
     <div className="weather-info-container">
-      <WeatherCard countryName={placeA} weatherData={americanWeatherData} />
-      <WeatherCard countryName={placeB} weatherData={japaneseWeatherData} />
+      <WeatherCard countryName={placeA} weatherData={japaneseWeatherData} />
+      <WeatherCard countryName={placeB} weatherData={americanWeatherData} />
     </div>
   );
 };

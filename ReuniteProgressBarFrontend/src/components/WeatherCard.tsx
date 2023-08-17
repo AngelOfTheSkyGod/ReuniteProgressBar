@@ -1,15 +1,14 @@
 import { Icon } from "@iconify/react";
 import { ReactElement } from "react";
-import { weatherCodes } from "../data/WeatherCodes";
+import { getWeatherCodeKey, weatherCodes } from "../data/WeatherCodes";
 import { WeatherData } from "../types/statstypes";
 
 function returnCorrectDiv(code: number): ReactElement<any, any> {
-  //   console.log("Returning:" + myMap.get(type)! + "id: " + id);
   return (
     <Icon
       className="chess-piece"
-      icon={weatherCodes.get(code)?.weatherImage!}
-      color={weatherCodes.get(code)?.color!}
+      icon={weatherCodes.get(getWeatherCodeKey(code))?.weatherImage!}
+      color={weatherCodes.get(getWeatherCodeKey(code))?.color!}
       width={"3rem"}
     />
   );
@@ -28,13 +27,15 @@ export const WeatherCard = ({
   let celsiusTemperature = weatherData.current_weather.temperature;
   let farenheitTemperature = celciusToFarenheit(celsiusTemperature);
   let weather = weatherCodes.get(
-    weatherData.current_weather.weathercode
+    getWeatherCodeKey(weatherData.current_weather.weathercode)
   )?.weatherText;
   console.log(
     `country: ${countryName} code: ${
       weatherData.current_weather.weathercode
     } is: ${
-      weatherCodes.get(weatherData.current_weather.weathercode)?.weatherText
+      weatherCodes.get(
+        getWeatherCodeKey(weatherData.current_weather.weathercode)
+      )?.weatherText
     }
     Current Weather: ${JSON.stringify(weatherData.current_weather)}
 
