@@ -7,10 +7,9 @@ function returnCorrectDiv(code: number): ReactElement<any, any> {
   //   console.log("Returning:" + myMap.get(type)! + "id: " + id);
   return (
     <Icon
-      className="chess-piece"
       icon={weatherCodes.get(code)?.weatherImage!}
       color={weatherCodes.get(code)?.color!}
-      width={"3rem"}
+      width={"5rem"}
     />
   );
 }
