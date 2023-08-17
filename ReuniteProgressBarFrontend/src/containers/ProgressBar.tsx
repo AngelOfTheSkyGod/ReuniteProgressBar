@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { StatsTiles } from "../components/StatsTiles";
 import { TextTiles } from "../components/TextTiles";
+import { placeA, placeB } from "../data/DataFields";
 import { CountryData } from "../types/datetypes";
 import { StatsData } from "../types/statstypes";
 import {
@@ -46,8 +47,8 @@ export const ProgressBar = () => {
     let date: Date = getUTCDate(0);
     let japanDate: Date = new Date(date.getTime() + 32400000);
     let chicagoDate: Date = new Date(date.getTime() - 18000000);
-    setAmericanData(buildCountryDateFromDate(chicagoDate, "Chicago, Illinois"));
-    setJapaneseData(buildCountryDateFromDate(japanDate, "Yokohama, Japan"));
+    setAmericanData(buildCountryDateFromDate(chicagoDate, placeA));
+    setJapaneseData(buildCountryDateFromDate(japanDate, placeB));
   };
 
   const startReload = () => {

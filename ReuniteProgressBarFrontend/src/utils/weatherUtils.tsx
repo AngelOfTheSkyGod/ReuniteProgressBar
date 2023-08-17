@@ -12,7 +12,7 @@ export const initializeWeatherObject = (): WeatherData => {
     temperature_2m: [],
   };
   let currentWeatherData: CurrentWeatherData = {
-    weather_code: 0,
+    weathercode: 0,
     temperature: 0,
   };
   return {
@@ -26,12 +26,10 @@ export const getWeatherData = async (
   setWeatherState: React.Dispatch<React.SetStateAction<WeatherData>>
 ) => {
   let weatherObject = initializeWeatherObject();
-  await axios
-    .get(
-      "https://api.open-meteo.com/v1/forecast?latitude=35.4333&longitude=139.65&hourly=temperature_2m,apparent_temperature,weathercode&daily=weathercode&current_weather=true&timezone=America%2FChicago"
-    )
-    .then((response) => {
-      weatherObject.current_weather = response.data.current_weather;
-      weatherObject.hourly = response.data.hourly;
-    });
+  await axios.get(path).then((response) => {
+    weatherObject.current_weather = response.data.current_weather;
+    weatherObject.hourly = response.data.hourly;
+
+    setWeatherState(weatherObject);
+  });
 };

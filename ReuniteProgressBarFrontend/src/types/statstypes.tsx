@@ -8,7 +8,7 @@ export interface HourlyWeatherData {
   temperature_2m: number[];
 }
 export interface CurrentWeatherData {
-  weather_code: number;
+  weathercode: number;
   temperature: number;
 }
 export interface WeatherData {
