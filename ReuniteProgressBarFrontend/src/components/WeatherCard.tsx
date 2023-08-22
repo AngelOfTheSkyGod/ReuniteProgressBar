@@ -24,8 +24,9 @@ export const WeatherCard = ({
   countryName: string;
   weatherData: WeatherData;
 }) => {
-  let celsiusTemperature = weatherData.current_weather.temperature;
-  let farenheitTemperature = celciusToFarenheit(celsiusTemperature);
+  let celsiusTemperature: number =
+    Math.round(weatherData.current_weather.temperature * 100) / 100;
+  let farenheitTemperature: number = celciusToFarenheit(celsiusTemperature);
   let weather = weatherCodes.get(
     getWeatherCodeKey(weatherData.current_weather.weathercode)
   )?.weatherText;

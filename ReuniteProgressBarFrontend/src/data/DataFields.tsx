@@ -1,5 +1,5 @@
-let placeB: string = "Yokohama, Japan";
+const placeB: string = "Yokohama, Japan";
 
-let placeA: string = "Chicago, Illinois";
+const placeA: string = "Chicago, Illinois";
 
 export { placeA, placeB };

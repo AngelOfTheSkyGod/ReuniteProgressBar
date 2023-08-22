@@ -4,7 +4,7 @@ interface WeatherCodeData {
   color: string;
 }
 
-let getWeatherCodeDataObject = (
+const getWeatherCodeDataObject = (
   text: string,
   image: string,
   color: string
@@ -16,17 +16,18 @@ let getWeatherCodeDataObject = (
   };
 };
 
-let getWeatherCodeKey = (code: number): number[] => {
+const getWeatherCodeKey = (code: number): number[] => {
   let val: number[] = [0];
   weatherCodes.forEach((value: WeatherCodeData, key: number[]) => {
     if (key.includes(code)) {
       val = key;
+      console.log(value);
     }
   });
   return val;
 };
 
-let weatherCodes = new Map<number[], WeatherCodeData>();
+const weatherCodes = new Map<number[], WeatherCodeData>();
 weatherCodes.set(
   [0],
   getWeatherCodeDataObject(
