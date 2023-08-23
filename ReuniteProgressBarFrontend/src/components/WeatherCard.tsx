@@ -14,7 +14,7 @@ function returnCorrectDiv(code: number): ReactElement<any, any> {
   );
 }
 const celciusToFarenheit = (temperature: number): number => {
-  return temperature * (9 / 5) + 32;
+  return Math.ceil(Math.round((temperature * (9 / 5)+ 32) * 100) / 100);
 };
 
 export const WeatherCard = ({
@@ -25,7 +25,7 @@ export const WeatherCard = ({
   weatherData: WeatherData;
 }) => {
   let celsiusTemperature: number =
-    Math.round(weatherData.current_weather.temperature * 100) / 100;
+    Math.ceil(Math.round(weatherData.current_weather.temperature * 100) / 100);
   let farenheitTemperature: number = celciusToFarenheit(celsiusTemperature);
   let weather = weatherCodes.get(
     getWeatherCodeKey(weatherData.current_weather.weathercode)

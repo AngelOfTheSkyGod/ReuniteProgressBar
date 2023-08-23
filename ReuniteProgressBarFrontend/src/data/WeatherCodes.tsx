@@ -37,6 +37,18 @@ weatherCodes.set(
   )
 );
 weatherCodes.set(
+  [96],
+  getWeatherCodeDataObject(
+    "Very Sunny",
+    "line-md:sunny-outline-loop",
+    "orange"
+  )
+);
+weatherCodes.set(
+  [ 51],
+  getWeatherCodeDataObject("Mostly Sunny", "ion:partly-sunny-outline", "orange")
+);
+weatherCodes.set(
   [1, 2, 3],
   getWeatherCodeDataObject("Partly Cloudy", "solar:clouds-bold", "gray")
 );
@@ -65,7 +77,7 @@ weatherCodes.set(
   )
 );
 weatherCodes.set(
-  [56, 57],
+  [56, 57, 53],
   getWeatherCodeDataObject("Drizzling", "carbon:rain-drizzle", "blue")
 );
 weatherCodes.set(

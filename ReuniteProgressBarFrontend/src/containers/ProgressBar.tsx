@@ -40,7 +40,8 @@ export const ProgressBar = () => {
 
   const calculateStats = () => {
     let date: Date = getUTCDate(0);
-    setStatsData(buildStatsFromDate(date));
+    let chicagoDate: Date = new Date(date.getTime() - 18000000);
+    setStatsData(buildStatsFromDate(chicagoDate));
   };
 
   const calculateTimes = () => {
